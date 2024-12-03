@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
-    static Set<Integer> chatgpt = new HashSet<>();
     static Set<Integer> mysolution = new HashSet<>();
 
     public static void main(String[] args) {
@@ -13,7 +12,7 @@ public class Main {
             List<String> input = readFile("src/input1.txt");
             System.out.println(firstPart(input));
             System.out.println(secondPart(input));
-        }
+    }
 
 
     public static int secondPart(List<String> input){
