@@ -15,7 +15,41 @@ public class Main {
         List<String> inputRaw = readFile("src/input1.txt");
         processFile(inputRaw);
         firstPart();
-        //secondPart();
+        secondPart();
+    }
+
+    public static void secondPart() {
+        for (int i = 0; i < nodes.length; i++) {
+            for (int j = 0; j < nodes[0].length; j++) {
+                Node currentNode = nodes[i][j];
+                for (int k = 0; k < nodes.length; k++) {
+                    for (int l = 0; l < nodes[0].length; l++) {
+                        Node compare = nodes[k][l];
+                        if (currentNode != compare && currentNode.frequency.equals(compare.frequency) && !currentNode.frequency.equals(".") &&
+                                !currentNode.frequency.equals("#")) {
+                            int xDif = currentNode.x - compare.x;
+                            int yDif = currentNode.y - compare.y;
+                            for (int m = -51; m < 51; m++) {
+                                int newX = currentNode.x + m * xDif;
+                                int newY = currentNode.y + m * yDif;
+                                if (isInside(newX, newY)) {
+                                    nodes[newY][newX].containsAntiNode = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        int result = 0;
+        for (int i = 0; i < nodes.length; i++) {
+            for (int j = 0; j < nodes[0].length; j++) {
+                if (nodes[i][j].containsAntiNode) {
+                    result++;
+                }
+            }
+        }
+        System.out.println(result);
     }
     public static void firstPart() {
         for (int i = 0; i < nodes.length; i++) {
