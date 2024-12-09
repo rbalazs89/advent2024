@@ -13,11 +13,106 @@ public class Main {
         input = readFile("src/input1.txt").get(0);
         processFile();
         part1();
+        printResult();
+        processFile();
+        //printBlock();
+        part2();
+        //printBlock();
+        printResult();
+    }
+
+
+    public static void part2(){
+
+        // need to reset these
+        boolean foundToMoveEndingNumber = false;
+        boolean foundToMoveStartingNumber = false;
+        int numberToMove = -2;
+        int toMoveEndingIndex = -2;
+        int toMoveStartingIndex = -2;
+        int gapToFindStartIndex = 0;
+        int gapToFindEndIndex = 0;
+
+        // don't reset these:
+        int investigateToMoveFromHere = blocks.length - 1;
+
+        outerloop:
+        for (int i = investigateToMoveFromHere;  i >= 0; i--) {
+
+            // find window of the current array to move
+            // first find ending number of the window
+            if(blocks[i] != -1){
+                foundToMoveEndingNumber = true;
+                toMoveEndingIndex = i;
+                numberToMove = blocks[i];
+            }
+
+            //find starting number of the window
+            if(foundToMoveEndingNumber){
+                for (int j = toMoveEndingIndex;  j >= 0; j--) {
+                    if(blocks[j] != numberToMove){
+                        foundToMoveStartingNumber = true;
+                        toMoveStartingIndex = j + 1;
+                        break;
+                    }
+                }
+            }
+
+            //find a suitable window where to place the array window
+            if(foundToMoveStartingNumber){
+                int gapToFind = toMoveEndingIndex - toMoveStartingIndex + 1;
+                int counterTheGap = 0;
+                int gapIndex = -1;
+
+                //start searching for a suitable gap
+                for (int j = 0; j < toMoveEndingIndex; j++) {
+
+                    //one break condition
+                    if (j > toMoveEndingIndex - gapToFind) {
+                        foundToMoveEndingNumber = false;
+                        foundToMoveStartingNumber = false;
+                        numberToMove = -2;
+                        toMoveEndingIndex = -2;
+                        toMoveStartingIndex = -2;
+                        i = i - gapToFind + 1;
+                        break;
+                    }
+
+                    //break condition end
+                    if(blocks[j] == -1){
+                        counterTheGap ++;
+                        gapIndex = j;
+                    } else {
+                        counterTheGap = 0;
+                    }
+
+                    //switch the numbers if suitable gap found:
+                    if (counterTheGap == gapToFind) {
+                        gapToFindEndIndex = gapIndex;
+                        gapToFindStartIndex = gapIndex - counterTheGap + 1;
+                        for (int k = gapToFindStartIndex; k <= gapToFindEndIndex; k++) {
+                            blocks[k] = numberToMove;
+                        }
+
+                        for (int k = toMoveStartingIndex; k <= toMoveEndingIndex; k++) {
+                            blocks[k] = -1;
+                        }
+
+                        //reset values for the next loop:
+                        foundToMoveEndingNumber = false;
+                        foundToMoveStartingNumber = false;
+                        numberToMove = -2;
+                        toMoveEndingIndex = -2;
+                        toMoveStartingIndex = -2;
+                        i = i - counterTheGap + 1;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public static void part1(){
-        int progress = 0;
-
         outerloop:
         for (int i = 0; i < blocks.length; i++) {
             if(blocks[i] != -1){
@@ -34,20 +129,8 @@ public class Main {
                     blocks[j] = tempInt;
                     break;
                 }
-
-            }
-
-            progress ++;
-        }
-
-        Long result = 0L;
-        for (int i = 0; i < blocks.length; i++) {
-            if(blocks[i] != -1){
-                result = result + i * blocks[i];
             }
         }
-        System.out.println(result);
-
     }
 
     public static void processFile(){
@@ -80,7 +163,6 @@ public class Main {
     }
 
     public static void printBlock(){
-
         for (int i = 0; i < blocks.length; i++) {
             if(blocks[i] == -1){
                 System.out.print(".");
@@ -99,5 +181,15 @@ public class Main {
             System.err.println("beep beep error");
             return new ArrayList<>();
         }
+    }
+
+    public static void printResult(){
+        Long result = 0L;
+        for (int i = 0; i < blocks.length; i++) {
+            if(blocks[i] != -1){
+                result = result + (long) i * blocks[i];
+            }
+        }
+        System.out.println(result);
     }
 }
