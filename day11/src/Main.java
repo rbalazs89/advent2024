@@ -3,87 +3,87 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
-    static ArrayList<Long> numbers = new ArrayList<>();
+    static ArrayList<Long> numbers1 = new ArrayList<>();
+    static Map<Long, Long> numbers = new HashMap<>();
 
     public static void main(String[] args) {
-        List<String> input = readFile("src/input3.txt");
+        List<String> input = readFile("src/input1.txt");
         processFile(input);
         part1();
+        processFile2(input);
+        part2();
     }
 
-    public static void part1(){
-        for (int k = 0; k < 75; k++) {
+    public static void part1() {
+        for (int k = 0; k < 25; k++) {
             ArrayList<Long> result = new ArrayList<>();
-            for (int i = 0; i < numbers.size(); i++) {
-                ArrayList<Long> tempList = new ArrayList<>();
-                tempList = processOneNumber(numbers.get(i));
-                for (int j = 0; j < tempList.size(); j++) {
-                    result.add(tempList.get(j));
+            for (Long number : numbers1) {
+                result.addAll(processOneNumber(number));
+            }
+            numbers1 = result;
+            System.out.println(numbers1.size());
+        }
+    }
+
+    public static void part2() {
+        for (int k = 0; k < 75; k++) {
+            Map<Long, Long> newNumbers = new HashMap<>();
+            for (Map.Entry<Long, Long> entry : numbers.entrySet()) {
+                Long number = entry.getKey();
+                Long count = entry.getValue();
+                for (Long result : processOneNumber(number)) {
+                    newNumbers.put(result, newNumbers.getOrDefault(result, 0L) + count);
                 }
             }
-            numbers.clear();
-            for (int i = 0; i < result.size(); i++) {
-                numbers.add(result.get(i));
-            }
-            //System.out.println(k);
-            System.out.println(numbers.size());
+            numbers = newNumbers;
+            long totalCount = numbers.values().stream().mapToLong(Long::longValue).sum();
+            System.out.println(totalCount);
+        }
+
+    }
+
+    public static void processFile(List<String> input) {
+        String[] array1 = input.get(0).split(" ");
+        for (String s : array1) {
+            numbers1.add(Long.valueOf(s));
         }
     }
 
-    public static void processFile(List<String> input){
-        String string1 = input.get(0);
-        String[] array1 = string1.split(" ");
-        for (int i = 0; i < array1.length; i++) {
-            numbers.add(Long.valueOf(array1[i]));
+    public static void processFile2(List<String> input) {
+        String[] array1 = input.get(0).split(" ");
+        for (String s : array1) {
+            Long num = Long.valueOf(s);
+            numbers.put(num, numbers.getOrDefault(num, 0L) + 1);
         }
     }
 
-    public static ArrayList<Long> processOneNumber(Long number){
+    public static ArrayList<Long> processOneNumber(Long number) {
         ArrayList<Long> result = new ArrayList<>();
-        if(number == 0){
+        if (number == 0) {
             result.add(1L);
-            return result;
-        }
-        if(String.valueOf(number).length() % 2 == 0){
+        } else if (String.valueOf(number).length() % 2 == 0) {
             String myString = String.valueOf(number);
-            String s1 = myString.substring(0, myString.length()/2);
-            String s2 = myString.substring(myString.length()/2);
+            String s1 = myString.substring(0, myString.length() / 2);
+            String s2 = myString.substring(myString.length() / 2);
             result.add(Long.valueOf(s1));
             result.add(Long.valueOf(s2));
-            /*
-            if(s1.charAt(s1.length() - 1) == '0'){
-                s1 = s1.replaceAll("0+$", "");
-            }
-            if(s2.charAt(s2.length() - 1) == '0') {
-                s2 = s2.replaceAll("0+$", "");
-            }
-            if(s1.length() == 0){
-                result.add(0L);
-            } else {
-                result.add(Long.valueOf(s1));
-            }
-            if(s2.length() == 0){
-                result.add(0L);
-            } else {
-                result.add(Long.valueOf(s2));
-            }*/
-            return result;
+        } else {
+            result.add(number * 2024);
         }
-        result.add(number * 2024);
         return result;
     }
 
-
-    public static List<String> readFile(String file){
+    public static List<String> readFile(String file) {
         Path filePath = Paths.get(file);
-        try{
+        try {
             return Files.readAllLines(filePath);
-        }
-        catch (IOException e){
-            System.err.println("beep beep error");
+        } catch (IOException e) {
+            System.err.println("Error reading file");
             return new ArrayList<>();
         }
     }
