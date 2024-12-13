@@ -6,5 +6,5 @@ public class ClawSetup {
     public long goalX;
     public long goalY;
     public long value;
-    public long value2;
+    public long value2 = 0;
 }
