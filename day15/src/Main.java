@@ -261,6 +261,7 @@ public class Main {
         for (int i = 0; i < commands.size(); i++) {
             oneMoveBoxes(robotX, robotY, commands.get(i));
         }
+
         // calculate result:
         int result = 0;
         for (int i = 0; i < maxY; i++) {
