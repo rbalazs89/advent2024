@@ -47,6 +47,9 @@ public class Main {
                     closeRobots ++;
                 }
             }
+            if(closeRobots == 202){
+                printOutField();
+            }
             if(closeRobots > maxCloseRobots){
                 maxTime = j;
                 maxCloseRobots = closeRobots;
@@ -85,11 +88,11 @@ public class Main {
 
         int result = 1;
         for (int i = 1; i < quadrants.length; i++) {
-            System.out.println("quadrant i : " + quadrants[i]);
             if(quadrants[i] != 0){
                 result = result * quadrants[i];
             }
         }
+        System.out.println(result);
     }
     public static int getQuadrant(Robot robot){
         if(robot.X == maxX/2 || robot.Y == maxY/2){
