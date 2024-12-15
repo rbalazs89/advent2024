@@ -2,8 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     static int maxY;
@@ -16,14 +15,252 @@ public class Main {
         List<String> input = readFile("src/input1.txt");
         processFile(input);
         part1();
+        processFile2(input);
+        part2();
+        //printOutField();
+    }
+    public static void part2(){
+        for (int i = 0; i < commands.size(); i++) {
+            oneMoveBoxes2(robotX, robotY, commands.get(i));
+        }
+
+        int result = 0;
+        for (int i = 0; i < maxY; i++) {
+            for (int j = 0; j < maxX; j++) {
+                if(field[i][j].equals("[")){
+                    result = result + i * 100 + j;
+                }
+            }
+        }
+        System.out.println(result);
+    }
+    public static void oneMoveBoxes2(int x, int y, String direction){
+        ArrayList<int[]> boxesCoordinates = new ArrayList<>();
+        ArrayList<int[]> boxesCoordinatesSaved = new ArrayList<>();
+        HashSet<String> visited = new HashSet<>();
+        boxesCoordinatesSaved.add(new int[]{y, x});
+        visited.add(y + "," + x);
+        boxesCoordinates.add(new int[]{y, x});
+
+        if(direction.equals("^")){
+            while (!boxesCoordinates.isEmpty()) {
+                int[] current = boxesCoordinates.remove(0); //get and remove the first box
+
+                int currY = current[0];
+                int currX = current[1];
+
+                if (field[currY - 1][currX].equals("[")) {
+                    if (!visited.contains((currY - 1) + "," + currX)) {
+                        boxesCoordinates.add(new int[]{currY - 1, currX});
+                        boxesCoordinatesSaved.add(new int[]{currY - 1, currX});
+                        visited.add((currY - 1) + "," + currX);
+                    }
+                    if (!visited.contains((currY - 1) + "," + (currX + 1))) {
+                        boxesCoordinates.add(new int[]{currY - 1, currX + 1});
+                        boxesCoordinatesSaved.add(new int[]{currY - 1, currX + 1});
+                        visited.add((currY - 1) + "," + (currX + 1));
+                    }
+                } else if (field[currY - 1][currX].equals("]")) {
+                    // Right part of a box
+                    if (!visited.contains((currY - 1) + "," + currX)) {
+                        boxesCoordinates.add(new int[]{currY - 1, currX});
+                        boxesCoordinatesSaved.add(new int[]{currY - 1, currX});
+                        visited.add((currY - 1) + "," + currX);
+                    }
+                    if (!visited.contains((currY - 1) + "," + (currX - 1))) {
+                        boxesCoordinates.add(new int[]{currY - 1, currX - 1});
+                        boxesCoordinatesSaved.add(new int[]{currY - 1, currX - 1});
+                        visited.add((currY - 1) + "," + (currX - 1));
+                    }
+                }
+            }
+            boolean canMove = true;
+            for (int i = 0; i < boxesCoordinatesSaved.size(); i++) {
+                int currX = boxesCoordinatesSaved.get(i)[1];
+                int currY = boxesCoordinatesSaved.get(i)[0];
+                if(!(field[currY - 1][currX].equals(".") || visited.contains((currY - 1) + "," + (currX)))){
+                    canMove = false;
+                    break;
+                }
+            }
+            if(canMove) {
+                Collections.sort(boxesCoordinatesSaved, new Comparator<int[]>() {
+                    @Override
+                    public int compare(int[] a, int[] b) {
+                        if (a[0] < b[0]) {
+                            return -1;
+                        } else if (a[0] > b[0]) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                });
+
+                robotY --;
+                for (int i = 0; i < boxesCoordinatesSaved.size(); i++) {
+                    int[] current = boxesCoordinatesSaved.get(i);
+                    field[current[0] - 1][current[1]] = field[current[0]][current[1]];
+                    field[current[0]][current[1]] = ".";
+                }
+            }
+        }
+        else if (direction.equals("v")){
+            while (!boxesCoordinates.isEmpty()) {
+                int[] current = boxesCoordinates.remove(0); //get and remove the first box
+
+                int currY = current[0];
+                int currX = current[1];
+
+                if (field[currY + 1][currX].equals("[")) {
+                    if (!visited.contains((currY + 1) + "," + currX)) {
+                        boxesCoordinates.add(new int[]{currY + 1, currX});
+                        boxesCoordinatesSaved.add(new int[]{currY + 1, currX});
+                        visited.add((currY + 1) + "," + currX);
+                    }
+                    if (!visited.contains((currY + 1) + "," + (currX + 1))) {
+                        boxesCoordinates.add(new int[]{currY + 1, currX + 1});
+                        boxesCoordinatesSaved.add(new int[]{currY + 1, currX + 1});
+                        visited.add((currY + 1) + "," + (currX + 1));
+                    }
+                } else if (field[currY + 1][currX].equals("]")) {
+                    // right part of a box
+                    if (!visited.contains((currY + 1) + "," + currX)) {
+                        boxesCoordinates.add(new int[]{currY + 1, currX});
+                        boxesCoordinatesSaved.add(new int[]{currY + 1, currX});
+                        visited.add((currY + 1) + "," + currX);
+                    }
+                    if (!visited.contains((currY + 1) + "," + (currX - 1))) {
+                        boxesCoordinates.add(new int[]{currY + 1, currX - 1});
+                        boxesCoordinatesSaved.add(new int[]{currY + 1, currX - 1});
+                        visited.add((currY + 1) + "," + (currX - 1));
+                    }
+                }
+            }
+            boolean canMove = true;
+            for (int i = 0; i < boxesCoordinatesSaved.size(); i++) {
+                int currX = boxesCoordinatesSaved.get(i)[1];
+                int currY = boxesCoordinatesSaved.get(i)[0];
+                if(!(field[currY + 1][currX].equals(".") || visited.contains((currY + 1) + "," + (currX)))){
+                    canMove = false;
+                    break;
+                }
+            }
+            if(canMove) {
+                Collections.sort(boxesCoordinatesSaved, new Comparator<int[]>() {
+                    @Override
+                    public int compare(int[] a, int[] b) {
+                        if (a[0] > b[0]) {
+                            return -1;
+                        } else if (a[0] < b[0]) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                });
+
+                robotY ++;
+                for (int i = 0; i < boxesCoordinatesSaved.size(); i++) {
+                    int[] current = boxesCoordinatesSaved.get(i);
+                    field[current[0] + 1][current[1]] = field[current[0]][current[1]];
+                    field[current[0]][current[1]] = ".";
+                }
+            }
+        }
+        else if (direction.equals("<")){
+
+            int areaToMove = 0;
+            for(int i = x - 1; i >= 0; i --){
+                areaToMove ++;
+                if(field[y][i].equals("#") || field[y][i].equals(".")){
+                    break;
+                }
+            }
+
+            for (int i = x - areaToMove; i < x - 1; i ++) {
+
+                if(field[y][i].equals(".")){
+                    field[y][i] = "[";
+                    field[y][i + 1] = "]";
+                    field[y][i + 2] = ".";
+                }
+                i = i + 1;
+            }
+
+            if(field[robotY][robotX - 1].equals(".")){
+                field[robotY][robotX] = ".";
+                robotX --;
+                field[robotY][robotX] = "@";
+            }
+        }
+        else if (direction.equals(">")){
+            int areaToMove = 0;
+            for(int i = x + 1; i < maxX; i ++){
+                areaToMove ++;
+                if(field[y][i].equals("#") || field[y][i].equals(".")){
+                    break;
+                }
+            }
+
+            for (int i = x + areaToMove; i > x + 1; i --) {
+                if(field[y][i].equals(".")){
+                    field[y][i] = "]";
+                    field[y][i - 1] = "[";
+                    field[y][i - 2] = ".";
+                }
+                i = i - 1;
+            }
+
+            if(field[robotY][robotX + 1].equals(".")){
+                field[robotY][robotX] = ".";
+                robotX ++;
+                field[robotY][robotX] = "@";
+            }
+        }
+    }
+    public static void processFile2(List<String> input){
+        maxX = input.get(0).length();
+        for (int i = 0; i < input.size(); i++) {
+            if(input.get(i).equals("")){
+                maxY = i;
+            }
+        }
+        for (int i = maxY + 1; i < input.size(); i++) {
+            for (int j = 0; j < input.get(i).length(); j++) {
+                commands.add(input.get(i).substring(j, j + 1));
+            }
+        }
+
+        field = new String[maxY][maxX * 2];
+        for (int i = 0; i < maxY; i++) {
+            for (int j = 0; j < maxX; j++) {
+                if(input.get(i).substring(j, j +1).equals(".")){
+                    field[i][2 * j] = ".";
+                    field[i][2 * j + 1] = ".";
+                }
+                else if(input.get(i).substring(j, j +1).equals("#")){
+                    field[i][2 * j] = "#";
+                    field[i][2 * j + 1] = "#";
+                }
+                else if(input.get(i).substring(j, j +1).equals("O")){
+                    field[i][2 * j] = "[";
+                    field[i][2 * j + 1] = "]";
+                }
+                else if(input.get(i).substring(j,j + 1).equals("@")){
+                    robotX = 2 * j;
+                    robotY = i;
+                    field[i][2 * j] = "@";
+                    field[i][2 * j + 1] = ".";
+                }
+            }
+        }
+        maxX = maxX * 2;
     }
     public static void part1(){
-        printOutField();
         for (int i = 0; i < commands.size(); i++) {
             oneMoveBoxes(robotX, robotY, commands.get(i));
         }
-        printOutField();
-
         // calculate result:
         int result = 0;
         for (int i = 0; i < maxY; i++) {
@@ -59,16 +296,6 @@ public class Main {
             for (int j = 0; j < input.get(i).length(); j++) {
                 commands.add(input.get(i).substring(j, j + 1));
             }
-        }
-    }
-
-    public static List<String> readFile(String file) {
-        Path filePath = Paths.get(file);
-        try {
-            return Files.readAllLines(filePath);
-        } catch (IOException e) {
-            System.err.println("Error reading file");
-            return new ArrayList<>();
         }
     }
 
@@ -163,6 +390,15 @@ public class Main {
                 robotX --;
                 field[robotY][robotX] = "@";
             }
+        }
+    }
+    public static List<String> readFile(String file) {
+        Path filePath = Paths.get(file);
+        try {
+            return Files.readAllLines(filePath);
+        } catch (IOException e) {
+            System.err.println("Error reading file");
+            return new ArrayList<>();
         }
     }
 }
