@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -16,21 +17,38 @@ public class Main {
     public static void main(String[] args) {
         List<String> input = readFile("src/input1.txt");
         processFile(input);
-        part1();
-        //part2();
+        //part1();
+        part2();
     }
 
     public static void part2(){
-        for (int i = 0; i < instructions.length; i++) {
-            System.out.print(instructions[i] + " ");
+        int instructionsLength = instructions.length - 1;
+        long start = Long.parseLong("3" + "0".repeat(instructionsLength), 8);
+        long end = (long) Math.pow(8, 16);
+        int increment = 01;
+        for (long i = start; i < end; i += increment) {
+            long a = i;
+            long b;
+            long c;
+            loop:{
+                int myoutputs = 0;
+                while (a != 0) {
+                    b = a & 0b111;
+                    b ^= 5;
+                    c = (b == 0) ? a : a >> b;
+                    b ^= 6;
+                    b ^= c;
+                    a >>= 3;
+                    if ((b & 0b111) != instructions[myoutputs])
+                        break loop;
+                    myoutputs++;
+                }
+                if (myoutputs >= instructionsLength) {
+                    System.out.println(i);
+                    return;
+                }
+            }
         }
-        // Program: 2_,4,1_,5,7_,5,4_,3,1_,6,0_,3,5_,5,3_,0
-        regA = 2;
-        command(2,4);
-        command(1,5);
-        command(7,5);
-        printoutValues();
-        System.out.println(outputs);
     }
 
     public static void part1(){
