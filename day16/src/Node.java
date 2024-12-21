@@ -4,6 +4,7 @@ public class Node {
     public int x;
     public int y;
     public int cost = Integer.MAX_VALUE;
+    public int bestCost = Integer.MAX_VALUE;
     public String currentDirection;
     public String nodeType;
     public ArrayList<Node> parent = new ArrayList<>();
