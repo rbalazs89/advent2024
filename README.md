@@ -22,3 +22,4 @@ This repository contains my advent of code solutions from the year 2024.
 | Day 18 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 19 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 20 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 21 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#FF7F7F](https://via.placeholder.com/15/FF7F7F/000000?text=+) Too hard                 |
