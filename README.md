@@ -2,10 +2,10 @@
 This repository contains my advent of code solutions from the year 2024.
 | Days   | Part 1                  | Part 2                 |
 | ------ | ----------------------- | ----------------------- |
-| Day 1  | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 2  | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 3  | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 4  | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 1  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 2  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 3  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 4  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 5  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 6  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 7  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
@@ -21,7 +21,7 @@ This repository contains my advent of code solutions from the year 2024.
 | Day 17 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 18 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 19 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 20 | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 21 | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#FF7F7F](https://via.placeholder.com/15/FF7F7F/000000?text=+) Too hard                 |
-| Day 22 | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 23 | ![#b8e6b8](https://via.placeholder.com/15/b8e6b8/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 20 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 21 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#FF7F7F](https://via.placeholder.com/15/FF7F7F/000000?text=+) Too hard                 |
+| Day 22 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
+| Day 23 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
