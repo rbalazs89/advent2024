@@ -8,40 +8,110 @@ public class Main {
     public static Node[] graph;
     public static HashMap<String, Node> graphMap = new HashMap<>();
     public static List<String> myInput = new ArrayList<>();
+    public static List<Node[]> threeNodes = new ArrayList<>();
 
     public static void main(String[] args) {
         List<String> input = readFile("src/input1.txt");
         processFile(input);
         part1();
-        part2();
+        part2(); // requires part1
     }
 
-    public static void part1(){
+    public static void part1() {
         int result = 0;
+
         for (int i = 0; i < graph.length; i++) {
             Node current = graph[i];
             for (int j = 0; j < current.connectedNodes.size(); j++) {
                 Node secondNode = current.connectedNodes.get(j);
-                for (int k = 0; k < current.connectedNodes.size(); k++) {
-                    if(j != k){
-                        Node thirdNode = current.connectedNodes.get(k);
-                        if(secondNode.connectedNodes.contains(thirdNode)){
-                            if(current.value.charAt(0) == 't' || secondNode.value.charAt(0) == 't' || thirdNode.value.charAt(0) == 't'){
-                                result ++;
+
+                if (secondNode.value.compareTo(current.value) > 0) {
+                    for (int k = 0; k < secondNode.connectedNodes.size(); k++) {
+                        Node thirdNode = secondNode.connectedNodes.get(k);
+
+                        if (thirdNode.value.compareTo(secondNode.value) > 0
+                                && thirdNode.connectedNodes.contains(current)) {
+
+                            threeNodes.add(new Node[]{current, secondNode, thirdNode});
+
+                            if (current.value.charAt(0) == 't'
+                                    || secondNode.value.charAt(0) == 't'
+                                    || thirdNode.value.charAt(0) == 't') {
+                                result++;
                             }
                         }
                     }
                 }
             }
         }
-        System.out.println(result / 6);
+
+        System.out.println(result);
     }
 
-    public static void part2(){
-        for (int i = 0; i < graph.length; i++) {
+    public static void part2() {
+        int maxCliqueSize = 0;
+        ArrayList<Node> maxClique = new ArrayList<>();
+
+        for (int i = 0; i < threeNodes.size(); i++) {
+            ArrayList<Node> connectedGroup = new ArrayList<>();
+            connectedGroup.add(threeNodes.get(i)[0]);
+            connectedGroup.add(threeNodes.get(i)[1]);
+            connectedGroup.add(threeNodes.get(i)[2]);
+
+            boolean expanded;
+            do {
+                expanded = false;
+
+                for (int j = 0; j < connectedGroup.size(); j++) {
+                    Node current = connectedGroup.get(j);
+
+                    for (int k = 0; k < current.connectedNodes.size(); k++) {
+                        Node potential = current.connectedNodes.get(k);
+
+                        boolean alreadyInGroup = false;
+                        for (int l = 0; l < connectedGroup.size(); l++) {
+                            if (connectedGroup.get(l) == potential) {
+                                alreadyInGroup = true;
+                                break;
+                            }
+                        }
+
+                        if (!alreadyInGroup) {
+                            boolean isClique = true;
+                            for (int l = 0; l < connectedGroup.size(); l++) {
+                                if (!connectedGroup.get(l).connectedNodes.contains(potential)) {
+                                    isClique = false;
+                                    break;
+                                }
+                            }
+
+                            if (isClique) {
+                                connectedGroup.add(potential);
+                                expanded = true;
+                            }
+                        }
+                    }
+                }
+            } while (expanded);
+
+            if (connectedGroup.size() > maxCliqueSize) {
+                maxCliqueSize = connectedGroup.size();
+                maxClique = connectedGroup;
+            }
+        }
+
+        maxClique.sort((a, b) -> a.value.compareTo(b.value));
+
+        for (int i = 0; i < maxClique.size(); i++) {
+            if(i < maxCliqueSize - 1){
+                System.out.print(maxClique.get(i).value + ",");
+            } else {
+                System.out.print(maxClique.get(i).value);
+            }
 
         }
     }
+
     public static List<String> readFile(String file) {
         Path filePath = Paths.get(file);
         try {
