@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
+    static String part1Result;
     public static ArrayList<Wire> wires = new ArrayList<>();
     public static ArrayList<Instruction> instructions = new ArrayList<>();
     public static HashMap<String, Wire> storage = new HashMap<>();
@@ -14,6 +15,46 @@ public class Main {
         processFile(input);
         //check();
         part1();
+        part2();
+    }
+
+    public static void part2(){
+        StringBuilder xResult = new StringBuilder();
+        wires.stream()
+                .filter(wire -> wire.name.startsWith("x"))
+                .sorted((w1, w2) -> Integer.compare(
+                        Integer.parseInt(w2.name.substring(1)),
+                        Integer.parseInt(w1.name.substring(1))
+                ))
+                .forEach(wire -> xResult.append(wire.value));
+
+        StringBuilder yResult = new StringBuilder();
+        wires.stream()
+                .filter(wire -> wire.name.startsWith("y"))
+                .sorted((w1, w2) -> Integer.compare(
+                        Integer.parseInt(w2.name.substring(1)),
+                        Integer.parseInt(w1.name.substring(1))
+                ))
+                .forEach(wire -> yResult.append(wire.value));
+
+
+        String yBinaryString = yResult.toString();
+        long yBinaryAsLong = Long.parseLong(yBinaryString, 2);
+
+        String xBinaryString = yResult.toString();
+        long xBinaryAsLong = Long.parseLong(xBinaryString, 2);
+
+        long result = yBinaryAsLong + xBinaryAsLong;
+        String stringResult = Long.toString(result, 2);
+
+        System.out.println(stringResult);
+        for (int i = 0; i < part1Result.length(); i++) {
+            if(part1Result.charAt(i) == stringResult.charAt(i)){
+                System.out.println(i);
+            }
+        }
+        System.out.println(stringResult.length());
+        System.out.println(part1Result.length());
     }
 
     public static void part1(){
@@ -24,6 +65,7 @@ public class Main {
         int counter = 0;
 
         while(!queue.isEmpty()){
+            counter ++;
             Instruction current = queue.poll();
 
             if(current.type.equals("AND")){
@@ -43,8 +85,10 @@ public class Main {
                     queue.add(current);
                 } else if(current.wire1.value == -1 && current.wire2.value == 0){
                     current.endWire.value = 0;
+                    //queue.add(current);
                 } else if(current.wire1.value == 0 && current.wire2.value == -1){
                     current.endWire.value = 0;
+                    //queue.add(current);
                 }
             } else if (current.type.equals("OR")){
                 if(current.wire1.value == -1 && current.wire2.value == -1){
@@ -59,8 +103,10 @@ public class Main {
                     current.endWire.value = 1;
                 } else if(current.wire1.value == -1 && current.wire2.value == 1){
                     current.endWire.value = 1;
+                    //queue.add(current);
                 } else if(current.wire1.value == 1 && current.wire2.value == -1){
                     current.endWire.value = 1;
+                    //queue.add(current);
                 } else if(current.wire1.value == -1 && current.wire2.value == 0){
                     queue.add(current);
                 } else if(current.wire1.value == 0 && current.wire2.value == -1){
@@ -99,10 +145,12 @@ public class Main {
                 .forEach(wire -> result.append(wire.value));
 
         String binaryString = result.toString();
+        part1Result = binaryString;
         long binaryAsLong = Long.parseLong(binaryString, 2);
 
         System.out.println("resulting binary string: " + binaryString);
         System.out.println("binary as long: " + binaryAsLong);
+        System.out.println(counter);
     }
 
     public static List<String> readFile(String file) {
