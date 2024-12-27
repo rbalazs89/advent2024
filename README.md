@@ -25,5 +25,5 @@ This repository contains my advent of code solutions from the year 2024.
 | Day 21 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#FF7F7F](https://via.placeholder.com/15/FF7F7F/000000?text=+) In progress              |
 | Day 22 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
 | Day 23 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 23 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ffffcc](https://via.placeholder.com/15/ffffcc/000000?text=+) Done, manual solution with graphviz|
-| Day 23 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | not yet available                    |
+| Day 24 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ffffcc](https://via.placeholder.com/15/ffffcc/000000?text=+) Done, manual solution with graphviz|
+| Day 25 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | not yet available                    |
