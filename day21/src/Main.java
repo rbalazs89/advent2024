@@ -3,25 +3,150 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
+    static HashMap<String, Long> myMap = new HashMap<>();
+    static HashMap<String, Long> nextMap = new HashMap<>();
     public static ArrayList<String> instructions = new ArrayList<>();
     public static ArrayList<Integer> numbers = new ArrayList<>();
     public static void main(String[] args) {
         List<String> input = readFile("src/input1.txt");
         processFile(input);
         part2();
+        //part1();
     }
 
-    public static void part2(){
-        int chainedKeyPads = 12;
-        for (int i = 0; i < 1; i++) {
-            String firstString = "^";
-            for (int j = 0; j < chainedKeyPads; j++) {
-                firstString = keyPad(firstString);
-                System.out.println(firstString.length());
+    public static void testConfigurations(){
+        long result = 0;
+        int chainedKeyPads = 5;
+
+        // numpad:
+        String currentString = "<<vA";
+        myMap.put(currentString, 1L);
+
+        // keypad:
+        int counter = 0;
+        while(counter < chainedKeyPads){
+            counter++;
+
+            // put new values into "nextMap"
+            nextMap.clear();
+            for(HashMap.Entry<String, Long> entry : myMap.entrySet()){
+                sliceUpString(entry.getKey(), entry.getValue());
             }
+
+            myMap.clear();
+            // process next values into myMap
+            for(HashMap.Entry<String, Long> entry : nextMap.entrySet()){
+                processStringIntoHashMap(entry.getKey(), entry.getValue());
+                //System.out.println(entry.getKey() + " values into map " + entry.getValue());
+            }
+        }
+
+        // get length:;
+        for(HashMap.Entry<String, Long> entry : myMap.entrySet()){
+            result = result + entry.getKey().length() * entry.getValue();
+        }
+        System.out.println(result);
+
+        myMap.clear();
+    }
+
+
+
+    public static void part2(){
+        long result = 0;
+        int chainedKeyPads = 25;
+        long part1result = 0;
+        for (int j = 0; j < instructions.size(); j++) {
+            String instruction = instructions.get(j);
+
+            // numpad:
+            String currentString = numPad(instruction);
+            String[] instructionArray = makeArray(currentString);
+
+            for (int i = 0; i < instructionArray.length; i++) {
+                currentString = instructionArray[i];
+                if(myMap.get(currentString) == null){
+                    myMap.put(currentString, 1L);
+                } else {
+                    myMap.put(currentString, myMap.get(currentString) + 1L);
+                }
+            }
+            // part 1 version for reference comparison:
+            /*
+            String s = numPad(instructions.get(j));
+            for (int i = 0; i < chainedKeyPads; i++) {
+                s = keyPad(s);
+            }
+            part1result = part1result + s.length() * numbers.get(j);
+            */
+
+            // keypad:
+            int counter = 0;
+            while(counter < chainedKeyPads){
+                counter++;
+
+                // put new values into "nextMap"
+                nextMap.clear();
+                for(HashMap.Entry<String, Long> entry : myMap.entrySet()){
+                    sliceUpString(entry.getKey(), entry.getValue());
+                }
+
+                myMap.clear();
+                // process next values into myMap
+                for(HashMap.Entry<String, Long> entry : nextMap.entrySet()){
+                    processStringIntoHashMap(entry.getKey(), entry.getValue());
+                    //System.out.println(entry.getKey() + " values into map " + entry.getValue());
+                }
+            }
+
+            // get length:;
+            for(HashMap.Entry<String, Long> entry : myMap.entrySet()){
+                result = result + entry.getKey().length() * entry.getValue() * numbers.get(j);
+            }
+            myMap.clear();
+        }
+        System.out.println("part 2 result with hashmap: " + result);
+        System.out.println("part 1 result for reference: " + part1result);
+
+    }
+    public static void sliceUpString(String s, long value){
+        String[] myArray = makeArray(s);
+        for (int i = 0; i < myArray.length; i++) {
+            String currentString = myArray[i];
+            if(nextMap.get(currentString) == null){
+                nextMap.put(currentString, value);
+            } else {
+                nextMap.put(currentString, nextMap.get(currentString) + value);
+            }
+        }
+    }
+    public static String[] makeArray(String s){
+        ArrayList<String> helper = new ArrayList<>();
+        while(s.length() > 0){
+            for (int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) == 'A'){
+                    helper.add(s.substring(0,i + 1));
+                    s = s.substring(i + 1, s.length());
+                    break;
+                }
+            }
+        }
+        String[] result = new String[helper.size()];
+        for (int i = 0; i < helper.size(); i++) {
+            result[i] = helper.get(i);
+        }
+
+        return result;
+    }
+    public static void processStringIntoHashMap(String s, long value){
+        if(myMap.get(s) == null){
+            myMap.put(keyPad(s),value);
+        } else {
+            myMap.put(keyPad(s), myMap.get(s) + value);
         }
     }
 
@@ -31,7 +156,10 @@ public class Main {
             String firstString = numPad(instructions.get(i));
             String secondString = keyPad(firstString);
             String thirdString = keyPad(secondString);
+            //String fourthString = keyPad(thirdString);
+            //String fifthString = keyPad(fourthString);
             result = result + thirdString.length() * numbers.get(i);
+            //result = result + fifthString.length() * numbers.get(i);
         }
         System.out.println(result);
     }
@@ -52,15 +180,6 @@ public class Main {
         }
     }
 
-    public static List<String> readFile(String file) {
-        Path filePath = Paths.get(file);
-        try {
-            return Files.readAllLines(filePath);
-        } catch (IOException e) {
-            System.err.println("Error reading file");
-            return new ArrayList<>();
-        }
-    }
     /**
     numpad:
      +---+---+---+
@@ -140,7 +259,6 @@ public class Main {
         }
 
         return code.toString();
-
     }
 
     public static String getInstructionsNumPad(int current, int end) {
@@ -152,7 +270,6 @@ public class Main {
         int endCol = (end + 2) % 3;
 
         StringBuilder code = new StringBuilder();
-
 
         while (currentRow < endRow) {
             code.append("^"); // move up
@@ -192,14 +309,19 @@ public class Main {
 
     public static String getInstructionsKeyPad2(char current, char end){
         String s = getInstructionsKeyPad(current, end);
-        if(s.equals("v>")){
-            return "<v";
-        }
-        if(s.equals("^<")){
-            return "<^";
-        }
-        if(s.equals(">v")){
-            return "v>";
+        if(current != '<' && end != '<'){
+            if(s.equals(">^")){
+                return "^>";
+            }
+            if(s.equals("v<")){
+                return "<v";
+            }
+            if(s.equals("^<")){
+                return "<^";
+            }
+            if(s.equals(">v")){
+                return "v>";
+            }
         }
         return s;
     }
@@ -225,64 +347,26 @@ public class Main {
                 currentRow--;
             }
 
-            while (currentCol < endCol) {
-                code.append(">"); // move right
-                currentCol++;
-            }
-
             while (currentRow < endRow) {
                 code.append("^"); // move up
                 currentRow ++;
+            }
+
+            while (currentCol < endCol) {
+                code.append(">"); // move right
+                currentCol++;
             }
         }
         return code.toString();
     }
 
-    public static String applyKeyPadTransformations(String input, int chains) {
-        char currentChar = 'A'; // Starting position
-        for (int i = 0; i < chains; i++) {
-            for (char instruction : input.toCharArray()) {
-                currentChar = getNextKeyPadPosition(currentChar, instruction);
-            }
+    public static List<String> readFile(String file) {
+        Path filePath = Paths.get(file);
+        try {
+            return Files.readAllLines(filePath);
+        } catch (IOException e) {
+            System.err.println("Error reading file");
+            return new ArrayList<>();
         }
-        return Character.toString(currentChar); // Return the final key
-    }
-
-    public static char getNextKeyPadPosition(char current, char instruction) {
-        // Define keypad layout with the null element at 0,0
-        char[][] keypad = {
-                {'-', 'A', '^'},  // Row 0
-                {'<', 'v', '>'}   // Row 1
-        };
-
-        // Locate current position
-        int currentRow = getKeyPadRow(current);
-        int currentCol = getKeyPadCol(current);
-
-        // Apply movement based on instruction
-        switch (instruction) {
-            case '^':
-                if (currentRow > 0 && currentCol < keypad[currentRow - 1].length) {
-                    currentRow -= 1;
-                }
-                break;
-            case 'v':
-                if (currentRow < keypad.length - 1 && currentCol < keypad[currentRow + 1].length) {
-                    currentRow += 1;
-                }
-                break;
-            case '<':
-                if (currentCol > 0 && keypad[currentRow][currentCol - 1] != '-') {
-                    currentCol -= 1;
-                }
-                break;
-            case '>':
-                if (currentCol < keypad[currentRow].length - 1 && keypad[currentRow][currentCol + 1] != '-') {
-                    currentCol += 1;
-                }
-                break;
-        }
-
-        return keypad[currentRow][currentCol];
     }
 }
