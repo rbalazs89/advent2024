@@ -1,29 +1,30 @@
 # advent2024
 This repository contains my advent of code solutions from the year 2024.
+
 | Days   | Part 1                  | Part 2                 |
 | ------ | ----------------------- | ----------------------- |
-| Day 1  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 2  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 3  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 4  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 5  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 6  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 7  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 8  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 9  | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 10 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 11 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 12 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 13 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 14 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 15 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 16 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ffffcc](https://via.placeholder.com/15/ffffcc/000000?text=+) Done, half manual solution|
-| Day 17 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 18 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 19 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 20 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 21 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done              |
-| Day 22 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 23 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                     |
-| Day 24 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ffffcc](https://via.placeholder.com/15/ffffcc/000000?text=+) Done, manual solution with graphviz|
-| Day 25 | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+) Done                    | ![#ccffcc](https://via.placeholder.com/15/ccffcc/000000?text=+)                          |
+| Day 1  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 2  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 3  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 4  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 5  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 6  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 7  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 8  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 9  | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 10 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 11 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 12 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 13 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 14 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 15 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 16 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done, half manual solution](https://img.shields.io/badge/Done_half_manual_solution-yellow)|
+| Day 17 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 18 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 19 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 20 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 21 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 22 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 23 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
+| Day 24 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done, manual solution with graphviz](https://img.shields.io/badge/Done_manual_solution_with_graphviz-yellow)|
+| Day 25 | ![Done](https://img.shields.io/badge/Done-brightgreen)                    | ![Done](https://img.shields.io/badge/Done-brightgreen)                     |
